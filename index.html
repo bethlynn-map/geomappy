@@ -123,7 +123,7 @@ function onEachFeature(feature, layer){
     layer.bindPopup('Percentile Diesel Particulate Matter: '+feature.properties.Av_absence);
 }
 var schoolsLayer = null
-    $.getJSON("data/schools_attend.geojson",function(data){
+    $.getJSON("data/school_attend.geojson",function(data){
         schoolsLayer = L.geoJson(data, {
             style: styleFunc,
             onEachFeature: onEachFeature
