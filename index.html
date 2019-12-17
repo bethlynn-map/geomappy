@@ -84,7 +84,7 @@ function setColorFunc(density){
 };
 function styleFunc(feature) {
     return {
-        fillColor: setColorFunc(feature.properties.Ave_P_DSLP),
+        fillColor: setColorFunc(feature.properties.Av_absence),
         fillOpacity: 0.9,
         weight: 1,
         opacity: 1,
@@ -108,7 +108,7 @@ function highlightFeature(e){
     }
 }
 function resetHighlight(e) {
-    neighborhoodsLayer.resetStyle(e.target);
+    schoolsLayer.resetStyle(e.target);
 }  
 function zoomFeature(e){
     console.log(e.target.getBounds());
@@ -120,15 +120,22 @@ function onEachFeature(feature, layer){
         mouseout: resetHighlight,
         click: zoomFeature
     });
-    layer.bindPopup('Percentile Diesel Particulate Matter: '+feature.properties.Ave_P_DSLP);
+    layer.bindPopup('Percentile Diesel Particulate Matter: '+feature.properties.Av_absence);
 }
-var neighborhoodsLayer = null;
-    $.getJSON("data/tracts_final.geojson",function(data){
-        neighborhoodsLayer = L.geoJson(data, {
-            style: styleFunc,
+var schoolsLayer = null
+    $.getJSON("data/schools_attend.geojson",function(data){
+        schoolsLayer = L.geoJson(data, {
+            style = styleFunc,
             onEachFeature: onEachFeature
         }).addTo(map);
     });
+// var neighborhoodsLayer = null;
+//     $.getJSON("data/tracts_final.geojson",function(data){
+//         neighborhoodsLayer = L.geoJson(data, {
+//             style: styleFunc,
+//             onEachFeature: onEachFeature
+//         }).addTo(map);
+//     });
         var map = L.map('map', {center: [39.981192, -75.155399], zoom: 10});
         L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { attribution: '© OpenStreetMap' }).addTo(map);
         map.doubleClickZoom.disable();
