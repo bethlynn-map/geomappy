@@ -125,7 +125,7 @@ function onEachFeature(feature, layer){
 var schoolsLayer = null
     $.getJSON("data/schools_attend.geojson",function(data){
         schoolsLayer = L.geoJson(data, {
-            style = styleFunc,
+            style: styleFunc,
             onEachFeature: onEachFeature
         }).addTo(map);
     });
